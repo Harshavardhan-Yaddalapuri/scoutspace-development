@@ -26,6 +26,12 @@ public class User {
     private String username;
 
     @NotNull
+    private String firstname;
+
+    @NotNull
+    private String lastname;
+
+    @NotNull
     @UniqueElements
     private String email;
 
@@ -37,7 +43,6 @@ public class User {
 
     @CreatedBy
     private String createdby;
-
 
     @LastModifiedDate
     private Date modifieddate;

@@ -67,6 +67,13 @@
             <version>2.3.0</version>
         </dependency>
 
+        <!-- Password Encoding dependencies -->
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-crypto</artifactId>
+        </dependency>
+
+
         <!-- Logging dependencies -->
         <dependency>
             <groupId>org.slf4j</groupId>
