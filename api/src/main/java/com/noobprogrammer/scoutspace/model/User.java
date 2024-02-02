@@ -1,52 +1,67 @@
 package com.noobprogrammer.scoutspace.model;
 
-import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.bson.types.ObjectId;
-import org.hibernate.validator.constraints.UniqueElements;
-import org.springframework.data.annotation.*;
+import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
+import java.util.Collection;
 import java.util.Date;
 
 
-@Document(collection = "User")
+@Document(collection = "user")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class User {
+public class User implements UserDetails {
 
     @Id
     private ObjectId id;
 
-    @NotNull
-    @UniqueElements
     private String username;
 
-    @NotNull
     private String firstname;
 
-    @NotNull
     private String lastname;
 
-    @NotNull
-    @UniqueElements
     private String email;
 
-    @NotNull
     private String password;
 
-    @CreatedDate
     private Date createddate;
 
-    @CreatedBy
     private String createdby;
 
-    @LastModifiedDate
     private Date modifieddate;
 
-    @LastModifiedBy
     private String modifiedby;
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return null;
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return false;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return false;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return false;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return false;
+    }
 }

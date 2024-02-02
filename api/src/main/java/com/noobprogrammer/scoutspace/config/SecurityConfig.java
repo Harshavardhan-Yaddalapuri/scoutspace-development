@@ -1,15 +1,21 @@
 package com.noobprogrammer.scoutspace.config;
 
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+
 
 @Configuration
-public class SecurityConfig {
+@EnableWebSecurity
+public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
-    @Bean
-    public PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
+    @Override
+    protected void configure(HttpSecurity http) throws Exception {
+        http.authorizeRequests()
+                // Allow access to these paths without authentication
+                .antMatchers("/api/v1/auth/signup", "/api/v1/auth/signin").permitAll()
+                // Restrict access to other paths
+                .anyRequest().authenticated().and().formLogin().loginPage("/api/v1/auth/signin").permitAll().and().logout().permitAll();
     }
 }
